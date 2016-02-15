@@ -1,0 +1,25 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 10: expected statement.
+    r_relationship = 0
+                   ^
+
+File "game/script.rpy", line 11: expected statement.
+    l_relationship = 0
+                   ^
+
+File "game/script.rpy", line 12: expected statement.
+    j_relationship = 0
+                   ^
+
+File "game/script.rpy", line 156: expected statement.
+    r_relationship += 1
+                    ^
+
+File "game/script.rpy", line 206: expected statement.
+    l_relationship += 1
+                    ^
+
+Ren'Py Version: Ren'Py 6.99.7.858
