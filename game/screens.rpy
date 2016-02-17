@@ -10,6 +10,20 @@
 #
 # Screen that's used to display adv-mode dialogue.
 # http://www.renpy.org/doc/html/screen_special.html#say
+screen button:
+    vbox xalign 0 yalign 1.0:
+        textbutton "Show affection points" action ui.callsinnewcontext("aff_screen_label")
+screen aff_screen:
+    frame:
+        has vbox
+        text "Roland: [Roland_love] points"
+        text "Louis: [Louis_love] points"
+        text "Jeremy: [Jeremy_love] points"
+        textbutton "Return" action Return()
+
+label aff_screen_label:
+    call screen aff_screen
+    return
 screen say(who, what, side_image=None, two_window=False):
 
     # Decide if we want to use the one-window or two-window variant.
@@ -279,6 +293,9 @@ screen file_picker():
 
             textbutton _("Next"):
                 action FilePageNext()
+                
+            textbutton _("Show affection points"):
+                action ui.callsinnewcontext("aff_screen_label")
 
         $ columns = 2
         $ rows = 5
@@ -544,6 +561,7 @@ screen quick_menu():
         textbutton _("F.Skip") action Skip(fast=True, confirm=True)
         textbutton _("Auto") action Preference("auto-forward", "toggle")
         textbutton _("Prefs") action ShowMenu('preferences')
+        textbutton _("Affection points") action ui.callsinnewcontext("aff_screen_label")
 
 init -2:
     style quick_button:

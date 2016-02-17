@@ -46,13 +46,13 @@ init python:
         
     config.overlay_functions.append(stats_overlay)
 init -2 python:
-    Louis_love = 10
+    Louis_love = 0
     max_love = 150
     
-    Jeremy_love = 10
+    Jeremy_love = 0
     max_love = 150
     
-    Roland_love = 10
+    Roland_love = 0
     max_love = 150
     
 init -5 python:
@@ -137,6 +137,7 @@ label start:
     e "I wish, but,as it seems, it is not going to happen."
     stop music fadeout 1
     scene bg classroom
+    show screen button
     show Lucy shock1
     with fade
     play music "Forever forward.mp3" fadeout 1
@@ -486,7 +487,8 @@ label Roland1:
     jump continue2
     return
 label continue2:
-    show bg classroom
+    show room
+    
     return
     
     
