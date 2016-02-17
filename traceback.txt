@@ -1,27 +1,21 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While loading <'Scale' <'Image' 'MS3-smile4.png'> 200 600 True>:
-  File "game/script.rpy", line 219, in script
-    j "No, don't be, all is well that ends well!"
-IOError: Couldn't find file 'MS3-smile4.png'.
+While running game code:
+  File "game/script.rpy", line 409, in script
+    with dissolve
+Exception: Could not find font u'LHFmisterkookyREG_0.TTF'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 219, in script
-    j "No, don't be, all is well that ends well!"
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/ast.py", line 603, in execute
-    renpy.exports.say(who, what, interact=self.interact)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/exports.py", line 1036, in say
-    who(what, interact=interact)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/character.py", line 826, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, **display_args)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/character.py", line 688, in do_display
-    **display_args)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/character.py", line 491, in display_say
-    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/ui.py", line 277, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "game/script.rpy", line 409, in script
+    with dissolve
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/ast.py", line 1258, in execute
+    renpy.exports.with_statement(trans, paired)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/exports.py", line 1271, in with_statement
+    return renpy.game.interface.do_with(trans, paired, clear=clear)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/core.py", line 1928, in do_with
+    clear=clear)
   File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/core.py", line 2354, in interact
     repeat, rv = self.interact_core(preloads=preloads, **kwargs)
   File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/core.py", line 2691, in interact_core
@@ -34,6 +28,12 @@ Full traceback:
     rv = d.render(widtho, heighto, st, at)
   File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/layout.py", line 650, in render
     surf = render(child, width, height, cst, cat)
+  File "renpy/display/render.pyx", line 103, in renpy.display.render.render (gen/renpy.display.render.c:3104)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 185, in renpy.display.render.render (gen/renpy.display.render.c:2721)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/transition.py", line 363, in render
+    top = render(self.new_widget, width, height, st, at)
   File "renpy/display/render.pyx", line 103, in renpy.display.render.render (gen/renpy.display.render.c:3104)
     cpdef render(d, object widtho, object heighto, double st, double at):
   File "renpy/display/render.pyx", line 185, in renpy.display.render.render (gen/renpy.display.render.c:2721)
@@ -54,27 +54,17 @@ Full traceback:
     cr = render(child, widtho, heighto, st - self.child_st_base, at)
   File "renpy/display/render.pyx", line 185, in renpy.display.render.render (gen/renpy.display.render.c:2721)
     rv = d.render(widtho, heighto, st, at)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/image.py", line 219, in render
-    return wrap_render(self.target, width, height, st, at)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/image.py", line 90, in wrap_render
-    rend = render(child, w, h, st, at)
-  File "renpy/display/render.pyx", line 103, in renpy.display.render.render (gen/renpy.display.render.c:3104)
-    cpdef render(d, object widtho, object heighto, double st, double at):
-  File "renpy/display/render.pyx", line 185, in renpy.display.render.render (gen/renpy.display.render.c:2721)
-    rv = d.render(widtho, heighto, st, at)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/im.py", line 478, in render
-    im = cache.get(self)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/im.py", line 200, in get
-    surf = image.load()
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/im.py", line 681, in load
-    child = cache.get(self.image)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/im.py", line 200, in get
-    surf = image.load()
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/display/im.py", line 529, in load
-    surf = renpy.display.pgrender.load_image(renpy.loader.load(self.filename), self.filename)
-  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/loader.py", line 533, in load
-    raise IOError("Couldn't find file '%s'." % name)
-IOError: Couldn't find file 'MS3-smile4.png'.
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/text/text.py", line 1675, in render
+    virtual_layout = Layout(self, width, height, renders, drawable_res=False, size_only=True)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/text/text.py", line 567, in __init__
+    glyphs = ts.glyphs(s, self)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/text/text.py", line 239, in glyphs
+    fo = font.get_font(self.font, self.size, self.bold, self.italic, 0, self.antialias, self.vertical, self.hinting, layout.oversample)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/text/font.py", line 646, in get_font
+    face = load_face(fn)
+  File "/Users/teajakic/Downloads/renpy-6.99.7-sdk/renpy/text/font.py", line 589, in load_face
+    raise Exception("Could not find font {0!r}.".format(orig_fn))
+Exception: Could not find font u'LHFmisterkookyREG_0.TTF'.
 
 Darwin-14.3.0-x86_64-i386-64bit
 Ren'Py 6.99.7.858

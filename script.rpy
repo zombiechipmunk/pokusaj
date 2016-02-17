@@ -20,19 +20,18 @@ init python:
                 style = "my_bar")
             ui.close()
             
-        if show_Roland:
+            if show_Roland:
             ui.frame(
-                xalign = 0.5, #centered
-                ypos = 400,) #400 px Down from the Top
-            
+                xalign = 0.5,
+                ypos = 400,)
             ui.vbox(xalign = 0.5)
-            ui.text ("Roland's Love Points: %d" %Roland_love, 
+            ui.text ("Roland's Love points: %d" %Louis_love,
                 xalign = 0.5)
-            ui.bar(max_love, Roland_love, 
-                style="my_bar")
+            ui.bar(max_love, Roland_love,
+                style = "my_bar")
             ui.close()
             
-        if show_Jeremy:
+            if show_Jeremy:
             ui.frame(
                 xalign = 0.5,
                 ypos = 400,)
@@ -173,7 +172,6 @@ label start:
     stop music fadeout 1
             
     return
-    
 label Roland:
     scene bg classroom
     show Lucy normal
@@ -228,7 +226,7 @@ label Roland:
     $ show_Roland = True
     pause 0.5 
     $ Roland_love += 10
-    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+    show expression Text("{color=ffffff}{font=LHFmisterkookyREG_0.TTF}+50 Love Points{/font}{/color}", 
         size=50, 
         yalign=0.5, # Centers the text -- Toward Bottom.
         xalign=0.5, # Centers the text -- Toward Right. 
@@ -237,7 +235,7 @@ label Roland:
     $ show_Roland = True
     
     $ renpy.pause()
-    hide text with dissolve
+    $ hide text with dissolve
     $ show_Roland = False
     hide bg classroom
     hide Roland flirty
@@ -290,7 +288,7 @@ label Louis:
     $ show_Louis = True
     pause 0.5 
     $ Louis_love += 10
-    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+    show expression Text("{color=ffffff}{font=LHFmisterkookyREG_0.TTF}+50 Love Points{/font}{/color}", 
         size=50, 
         yalign=0.5, # Centers the text -- Toward Bottom.
         xalign=0.5, # Centers the text -- Toward Right. 
@@ -299,7 +297,7 @@ label Louis:
     $ show_Louis = True
     pause 0.5
     $ renpy.pause()
-    hide text with dissolve
+    $ hide text with dissolve
     $ show_Louis = False
 
 
@@ -314,7 +312,7 @@ label Louis:
 label continue0:
     scene bg school_corridor_afternoon
     show Lucy tired
-    "Thoroughly hungry and craving a cup of coffee, I aimelessly began wandering through the school corriddors."
+    "Thoroughly hungry and craving, no, desperately needing a cup of coffee, I aimelessly began wandering through the school corriddors."
     "I could feel my heavy eyelids closing as I struggled to remain awake."
     "*CRASH*"
     show Jeremy surprised at right
@@ -333,7 +331,7 @@ label continue0:
     show Jeremy surprised at right
     e "Eh, sorry, I have to go, I have to... I know that..."
     e "EEEEH!"
-    hide Lucy shock 1
+    hide Lucy shock1
     j "What an odd girl..."
     j "Huh?"
     show Jeremy normal at right
@@ -354,7 +352,7 @@ label station:
     "I basically ran away from the school gates."
     "Dead tired and half asleep, I keep dreaming of coffee ,cheezy romance novels and shoujo mangas."
     "Untill..."
-    show Jeremy smile at right
+    show Jeremy laughing at right
     with dissolve
     show Roland flirty at left
     with dissolve
@@ -375,7 +373,7 @@ label station:
         "Walk home with Louis-He'll cheer you up.":
             jump Louis1
         "Go to Roland- you've missed him too much":
-            jump Roland1
+            jump Roland 1
     return
 label Jeremy:
     scene bg station
@@ -401,7 +399,7 @@ label Jeremy:
     $ show_Jeremy = True
     pause 0.5 
     $ Jeremy_love += 10
-    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+    show expression Text("{color=ffffff}{font=LHFmisterkookyREG_0.TTF}+50 Love Points{/font}{/color}", 
         size=50, 
         yalign=0.5, # Centers the text -- Toward Bottom.
         xalign=0.5, # Centers the text -- Toward Right. 
@@ -410,7 +408,7 @@ label Jeremy:
     $ show_Louis = True
     pause 0.5
     $ renpy.pause()
-    hide text with dissolve
+    $ hide text with dissolve
     $ show_Jeremy = False
     jump continue2
     hide Jeremy flirty
@@ -432,10 +430,10 @@ label Louis1:
     l "And I am aware of your obsession with everything celestial."
     show Lucy happy1
     e "I would love to!"
-    $ show_Louis = True
+        $ show_Louis = True
     pause 0.5 
     $ Louis_love += 10
-    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+    show expression Text("{color=ffffff}{font=LHFmisterkookyREG_0.TTF}+50 Love Points{/font}{/color}", 
         size=50, 
         yalign=0.5, # Centers the text -- Toward Bottom.
         xalign=0.5, # Centers the text -- Toward Right. 
@@ -444,7 +442,7 @@ label Louis1:
     $ show_Louis = True
     pause 0.5
     $ renpy.pause()
-    hide text with dissolve
+    $ hide text with dissolve
     $ show_Louis = False
     
     jump continue2
@@ -469,27 +467,12 @@ label Roland1:
     show Lucy happy1
     e "Ofcourse!"
     r "I'll pick you up."
-    $ show_Roland = True
-    pause 0.5 
-    $ Roland_love += 10
-    show expression Text("{color=ffffff}+10 Love Points{/color}", 
-        size=50, 
-        yalign=0.5, # Centers the text -- Toward Bottom.
-        xalign=0.5, # Centers the text -- Toward Right. 
-        drop_shadow=(2, 2)) as text
-    with dissolve
-    $ show_Roland = True
-    
-    $ renpy.pause()
-    hide text with dissolve
-    $ show_Roland = False
     jump continue2
     return
-label continue2:
-    show bg classroom
-    return
-    
     
     
         
+    
+
+    
     
