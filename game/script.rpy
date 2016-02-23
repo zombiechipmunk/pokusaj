@@ -7,7 +7,7 @@ init python:
     show_Louis = False
     show_Roland = False
     show_Jeremy = False
-
+    
     def stats_overlay():
         if show_Louis:
             ui.frame(
@@ -77,6 +77,7 @@ define e = Character('Lucy', color="#FFC0CB")
 define r = Character('Roland', color= "#8B2500")
 define l = Character("Louis", color = "#0000CD")
 define j = Character("Jeremy", color = "#00BFFF")
+image bg rooftop = "rooftop.png"
 image bg space = "110530.jpg"
 image bg room = "120529.jpg"
 image bg classroom = "Classroom_01_day.jpg"
@@ -89,6 +90,7 @@ image Lucy scared1 = im.Scale("scared1.png",250,600)
 image Lucy shock1 = im.Scale("shock1.png",250,600)
 image Lucy shy = im.Scale("embarrassed2.png",250,600)
 image Lucy pout = im.Scale("pout1.png",250,600)
+image Lucy angry = im.Scale("angry4.png",250,600)
 image Lucy happy1 = im.Scale("smile3.png",250,600)
 image Lucy happy2 = im.Scale("smile1.png",250,600)
 image Roland normal = im.Scale("MS2-smile1.png", 250, 700)
@@ -97,14 +99,17 @@ image Roland happy = im.Scale("MS2-smile6.png",250,700)
 image Roland upset = im.Scale("MS2-upset1.png",250,700)
 image Roland sad = im.Scale("MS2-sad.png",250,700)
 image Louis flirty = im.Scale("MS1-wink.png",400,700)
-image Louis normal = im.Scale("MS1-default.png",300,700)
+image Louis normal = im.Scale("MS1-default.png",400,700)
 image Louis upset = im.Scale("MS1-awkward.png",400,700)
+image Louis angry = im.Scale("MS1-angry.png", 400, 700)
 image Louis unhappy = im.Scale("MS1-pout.png",400,700)
 image Jeremy surprised = im.Scale("MS3-surprised2.png",300,700)
 image Jeremy smile = im.Scale("MS3-smile5.png", 300, 700)
 image Jeremy normal = im.Scale("MS3-default.png",300,700)
 image Jeremy flirty = im.Scale("MS3-wink.png",300,700)
 image Jeremy shy1 = im.Scale("MS3-shy1.png",300,700)
+image Jeremy sad = im.Scale("MS3-sad1.png",300,700)
+image Jeremy angry = im.Scale("MS3-angry3.png",300,700)
 image nebula = "nebula.jpg"
 image mm_idle = "mm_idle.png"
 image mm_hover = "mm_hover.png"
@@ -137,7 +142,6 @@ label start:
     e "I wish, but,as it seems, it is not going to happen."
     stop music fadeout 1
     scene bg classroom
-    show screen button
     show Lucy shock1
     with fade
     play music "Forever forward.mp3" fadeout 1
@@ -355,6 +359,8 @@ label station:
     "I basically ran away from the school gates."
     "Dead tired and half asleep, I keep dreaming of coffee ,cheezy romance novels and shoujo mangas."
     "Untill..."
+    hide Lucy
+    with dissolve
     show Jeremy smile at right
     with dissolve
     show Roland flirty at left
@@ -408,13 +414,15 @@ label Jeremy:
         xalign=0.5, # Centers the text -- Toward Right. 
         drop_shadow=(2, 2)) as text
     with dissolve
-    $ show_Louis = True
+    $ show_Jeremy = True
     pause 0.5
     $ renpy.pause()
     hide text with dissolve
     $ show_Jeremy = False
     jump continue2
     hide Jeremy flirty
+    hide Lucy happy1
+    with dissolve
     return
     
 label Louis1:
@@ -447,6 +455,9 @@ label Louis1:
     $ renpy.pause()
     hide text with dissolve
     $ show_Louis = False
+    hide Louis flirty
+    hide Lucy happy1
+    with dissolve
     
     jump continue2
     return
@@ -484,11 +495,221 @@ label Roland1:
     $ renpy.pause()
     hide text with dissolve
     $ show_Roland = False
+    hide Roland flirty
+    with dissolve
     jump continue2
     return
 label continue2:
-    show room
+    show bg classroom
+    show Lucy tired
+    show Louis flirty at left
+    e "How do you manage being hyper so early?"
+    l "I actually sleep at night. How do you manage being always tired?"
+    e "Because I, unlike you, need more than three hours of sleep!"
+    e "Waking up to see the alarm set for 6.a.m. drains me of all energy as it is."
+    show Lucy sweat1
+    e "And we have a test tomorrow..."
+    e "The only thing I know is the fact that I know nothing."
+    l "It's your fault, by the way."
+    l "If you were paying attention, you would have learned."
+    show Lucy pout
+    e "It is not my fault, really."
+    e "I mean, it is..."
+    show Lucy normal
+    e "Let's not talk about this."
+    show Louis normal at left
+    l "Ok, ok."
+    "Classmate" "Lucy! There's a guy looking for you."
+    show Lucy shock1
+    show Louis unhappy at left
+    e "Who could that be?"
+    l "You didn't tell me you have got yourself a boyfriend."
+    e "Because I haven't."
+    show Louis flirty at left
+    l "Oh! Cool!"
+    hide Louis flirty
+    with dissolve 
+    hide Lucy shock1
+    with moveoutright
+    show Lucy normal
+    show Jeremy smile at right
+    with dissolve
+    e "Oh! Jeremy!"
+    j "Hi Lucy!"
+    e "How come you're here?"
+    j "Been bored. Wanna eat at the rooftop?"
+    menu:
+        "Sure, why not?":
+            jump rooftopJ
+        "Can't, I'm staying in the classroom":
+            jump classR
+        "Can't, I always eat lunch with Louis.":
+            jump classL
+    hide Jeremy 
     
+    return
+label rooftopJ:
+    show bg rooftop
+    show Lucy normal
+    show Jeremy normal at right
+    e "So, how come you wanted to eat lunch with me?"
+    j "No particular reason, just curious about you."
+    show Lucy shy
+    e "Eeeh, how come?"
+    show Jeremy flirty at right
+    j "It is not every day I get to meet such a cute girl."
+    e "Don't tease me, I'll leave."
+    show Jeremy normal at right
+    j "Don't leave. I'm just bored there, honest."
+    show Lucy normal
+    e "Don't you have friends?"
+    j "I do- Or I, at least, used to."
+    j "I'm getting over a recent break up, and all my friends took her side."
+    e "What happened?"
+    j "Well, she was going through a rough patch."
+    j "I don't even know why I'm telling you about this, but so be it."
+    j "I was out in the countryside with my parents."
+    show Jeremy sad at right
+    j "Her Dad died."
+    j "I had no signal whatsoever so I didn't know."
+    show Jeremy angry at right
+    j "She cheated on me with my older brother who stayed home, because, well, he could."
+    j "Anyway, I forgave her, but the next day, I saw them again."
+    j "I just couldn't take it- it seemed pointless."
+    j "My friends think I was too hard on her."
+    show Jeremy normal at right
+    e "I don't think so."
+    e "I get it, she was having a hard time, and you weren't there for her."
+    e "BUT, if she wasn't feeling comfortable with her relationship, she should've tried to talk it over."
+    e "If you had stayed with her, both of you would just be suffering, but neither would know for what cause."
+    show Jeremy smile at right
+    j "Thank you."
+    $ show_Jeremy = True
+    pause 0.5 
+    $ Jeremy_love += 10
+    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+        size=50, 
+        yalign=0.5, # Centers the text -- Toward Bottom.
+        xalign=0.5, # Centers the text -- Toward Right. 
+        drop_shadow=(2, 2)) as text
+    with dissolve
+    $ show_Jeremy = True
+    pause 0.5
+    $ renpy.pause()
+    hide text with dissolve
+    $ show_Jeremy = False
+    hide Lucy
+    hide Jeremy
+    with dissolve
+    
+    return
+label classR:
+    show bg classroom
+    show Roland flirty at left
+    show Lucy happy1 
+    e "Hello there, big boy."
+    r "Hey there pretty."
+    e "What's a lovely bloke like you doing alone in a filthy place like this?"
+    r "Well, Ma'am, he is hiding from 'em big ol gals tryina use him."
+    e "Worry not, m'lord, this proud knight shall protect thee!"
+    r "Oh dear, female knight, my personal guard! Ain't I a lucky man!"
+    "We just stood there and laughed for the next few minutes."
+    "I missed our foolish little talks. Louis is a great person, and a better friend."
+    "But not nearly as imaginitive as Roland."
+    e "God I missed you."
+    show Roland happy at left
+    r "I missed you too, love."
+    e "Do you miss Louis?"
+    show Roland upset at left
+    r "Ehh..."
+    show Lucy normal
+    e "You don't have to tell me, if you don't want to"
+    r "Sometimes... But it's complicated, love."
+    e "You know I'm here for you."
+    show Roland happy at left
+    r "Yes!"
+    e "But one day, you'll have to tell me what happened."
+    show Roland upset at left
+    r "Yes... And I will... Just, not today, I am not ready."
+    e "It's ok."
+    e "Oh, let's better start eating."
+    show Lucy happy1
+    show Roland happy at left
+    r "Soooo... May I eat your momma's cooking again?"
+    e "Sure thing, sweetie!"
+    "As we started devouring our lunchboxes, I felt a pair of eyes on my back."
+    "But I decided not to mind."
+    $ show_Roland = True
+    pause 0.5 
+    $ Roland_love += 10
+    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+        size=50, 
+        yalign=0.5, # Centers the text -- Toward Bottom.
+        xalign=0.5, # Centers the text -- Toward Right. 
+        drop_shadow=(2, 2)) as text
+    with dissolve
+    $ show_Roland = True
+    
+    $ renpy.pause()
+    hide text with dissolve
+    $ show_Roland = False
+    return
+label classL:
+    show bg classroom
+    show Lucy happy1
+    e "Louis!!! Momma wants to eat, momma loves yo momma's cooking!"
+    show Louis flirty at right
+    l "Oh, I will feed momma!"
+    show Lucy pout
+    e "Not like that!"
+    e "Perv!"
+    l "You know you love me the way I am!"
+    show Lucy happy1
+    e "Sure, now gimme da food!"
+    l "Will do."
+    l "Gotta feed the beast!"
+    show Lucy shy
+    e "Idiot."
+    show Lucy normal
+    e "Ne, why don't we invite Roland?"
+    show Louis upset at right
+    "I watched colour fade from his face as he looked at me with disbelief."
+    l "Did- did he try to talk to you about me?"
+    show Lucy shock1
+    e "What- No, why?"
+    l "Why are you mentioning it then?"
+    show Louis angry at right
+    e "I- I don't know why I shouldn't"
+    l "I... I told you not to bother me about it."
+    show Lucy angry 
+    e "I lost a friend, and I don't know why, I think this matter needs to be resolved."
+    show Louis awkward at left
+    l "You're right."
+    l "And you need to know what happened."
+    l"Just not- not today, ok?"
+    show Lucy normal
+    e "Ok, whenever you're ready."
+    show Louis normal
+    l "Thank you."
+    show Lucy happy1
+    e "Now, gimme that food!"
+    $ show_Louis = True
+    pause 0.5 
+    $ Louis_love += 10
+    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+        size=50, 
+        yalign=0.5, # Centers the text -- Toward Bottom.
+        xalign=0.5, # Centers the text -- Toward Right. 
+        drop_shadow=(2, 2)) as text
+    with dissolve
+    $ show_Louis = True
+    pause 0.5
+    $ renpy.pause()
+    hide text with dissolve
+    $ show_Louis = False
+    hide Louis
+    hide Lucy
+    with dissolve
     return
     
     

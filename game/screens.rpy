@@ -10,9 +10,7 @@
 #
 # Screen that's used to display adv-mode dialogue.
 # http://www.renpy.org/doc/html/screen_special.html#say
-screen button:
-    vbox xalign 0 yalign 1.0:
-        textbutton "Show affection points" action ui.callsinnewcontext("aff_screen_label")
+
 screen aff_screen:
     frame:
         has vbox
