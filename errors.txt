@@ -2,8 +2,8 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 574: is not terminated with a newline. (Check strings and parenthesis.)
-(Perhaps you left out a " at the end of the first line.)
-        e "So, how come you wanted
+File "game/script.rpy", line 964: end of line expected.
+    jump school 2
+                ^
 
 Ren'Py Version: Ren'Py 6.99.7.858

@@ -1,23 +1,21 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While parsing /Users/teajakic/Developer/pokusaj/game/script.rpy.
-ScriptError: Name u'start' is defined twice, at game/dse-3.1/game/main.rpy:36 and game/script.rpy:118.
+While running game code:
+  File "game/script.rpy", line 920, in script
+    jump school2
+ScriptError: could not find label 'school2'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/bootstrap.py", line 281, in bootstrap
-    renpy.main.main()
-  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/main.py", line 346, in main
-    renpy.game.script.load_script() # sets renpy.game.script.
-  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/script.py", line 259, in load_script
-    self.load_appropriate_file(".rpyc", ".rpy", dir, fn, initcode)
-  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/script.py", line 738, in load_appropriate_file
-    self.finish_load(stmts, initcode, filename=fn + source)
-  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/script.py", line 414, in finish_load
-    bad_node.filename, bad_node.linenumber))
-ScriptError: Name u'start' is defined twice, at game/dse-3.1/game/main.rpy:36 and game/script.rpy:118.
+  File "game/script.rpy", line 920, in script
+    jump school2
+  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/ast.py", line 1512, in execute
+    rv = renpy.game.script.lookup(target)
+  File "/Users/teajakic/Downloads/New Folder With Items/renpy-6.99.7-sdk/renpy/script.py", line 843, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'school2'.
 
 Darwin-14.3.0-x86_64-i386-64bit
 Ren'Py 6.99.7.858
- 
+pokusaj 0.0

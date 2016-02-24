@@ -37,7 +37,7 @@ init python:
                 xalign = 0.5,
                 ypos = 400,)
             ui.vbox(xalign = 0.5)
-            ui.text ("Jeremy's Love points: %d" %Louis_love,
+            ui.text ("Jeremy's Love points: %d" %Jeremy_love,
                 xalign = 0.5)
             ui.bar(max_love, Jeremy_love,
                 style = "my_bar")
@@ -47,13 +47,16 @@ init python:
     config.overlay_functions.append(stats_overlay)
 init -2 python:
     Louis_love = 0
-    max_love = 150
+    max_love = 100
     
     Jeremy_love = 0
-    max_love = 150
+    max_love = 100
     
     Roland_love = 0
-    max_love = 150
+    max_love = 100
+    
+    movie = 0
+    observatorium = 0
     
 init -5 python:
     style.my_bar = Style(style.default)
@@ -77,6 +80,7 @@ define e = Character('Lucy', color="#FFC0CB")
 define r = Character('Roland', color= "#8B2500")
 define l = Character("Louis", color = "#0000CD")
 define j = Character("Jeremy", color = "#00BFFF")
+image bg cafe = im.Scale("cafe_background_2_by_derpinc-d8k97im.png", 1024,800)
 image bg rooftop = "rooftop.png"
 image bg space = "110530.jpg"
 image bg room = "120529.jpg"
@@ -423,7 +427,7 @@ label Jeremy:
     hide Jeremy flirty
     hide Lucy happy1
     with dissolve
-    return
+    jump continue2
     
 label Louis1:
     scene bg station
@@ -458,6 +462,7 @@ label Louis1:
     hide Louis flirty
     hide Lucy happy1
     with dissolve
+    $observatorium +=1
     
     jump continue2
     return
@@ -497,8 +502,9 @@ label Roland1:
     $ show_Roland = False
     hide Roland flirty
     with dissolve
+    $movie+=1
     jump continue2
-    return
+    jump continue2
 label continue2:
     show bg classroom
     show Lucy tired
@@ -602,7 +608,7 @@ label rooftopJ:
     hide Jeremy
     with dissolve
     
-    return
+    jump corridor
 label classR:
     show bg classroom
     show Roland flirty at left
@@ -653,7 +659,7 @@ label classR:
     $ renpy.pause()
     hide text with dissolve
     $ show_Roland = False
-    return
+    jump corridor
 label classL:
     show bg classroom
     show Lucy happy1
@@ -710,9 +716,336 @@ label classL:
     hide Louis
     hide Lucy
     with dissolve
+    jump corridor
+    
+label corridor:
+    show bg school_corridor_afternoon
+    show Lucy tired
+    "It's friday and school is almost over."
+    if movie == 0:
+        if observatorium == 0:
+            if Jeremy_love == 20:
+                "I don't know what I'll do, I'm not keen on the idea of wandering off at home and doing nothing."
+                "I mean, I do like being alone and reading a few books, but this week has been so full of tests that I need to do something else to take my mind off of thing."
+                show Jeremy smile at left
+                j "Hey! Just the person I was looking for!"
+                show Lucy happy1
+                e "Hey, Jeremy!"
+                j "Listen, It's friday night, and I have no plans for tonight."
+                j "Wanna go and grab a cup of coffee or something?"
+                e "Sure thing! I was just wondering what I'll be doing tonight!"
+                j "Great!"
+                $ show_Jeremy = True
+                pause 0.5 
+                $ Jeremy_love += 10
+                show expression Text("{color=ffffff}+10 Love Points{/color}", 
+                    size=50, 
+                    yalign=0.5, # Centers the text -- Toward Bottom.
+                    xalign=0.5, # Centers the text -- Toward Right. 
+                    drop_shadow=(2, 2)) as text
+                with dissolve
+                $ show_Jeremy = True
+                pause 0.5
+                $ renpy.pause()
+                hide text with dissolve
+                $ show_Jeremy = False
+                hide Jeremy
+                with dissolve
+                jump Jeremydate
+            else:
+                "I don't have anything to do"
+                show Louis normal at right
+                l "Hey, Mum told me to invite you for dinner. I Just got a new game, you up?"
+                show Lucy happy1
+                e "Yeah, sure thing!"
+        else:
+            "I can't find Louis anywhere, and he told me that he'll take me to the observatorium."
+            "When, suddenly, I see him fighting with Roland"
+            hide Lucy with dissolve
+            show Louis angry
+            show Roland upset at right
+            with dissolve
+            r "Can't you just let her make her own decisions?!"
+            l "Just leave her alone, you can't just try to make things the way they were."
+            l "You left us! You HURT US! Just because of your lack of ability to decide!"
+            l "You can't just come back and pretend none of it happened."
+            l "If she knew what you did- she'd never speak to you again."
+            r "She'd understand."
+            l "Don't be so selfish."
+            e "Guys, what's going on?"
+            show Roland sad at right
+            show Louis upset 
+            r "I- I have to go. See you later, Lucy."
+            hide Roland 
+            with moveoutright
+            l "Hey, sweetie."
+            show Lucy shock1 at right
+            with dissolve
+            e "What was that all about."
+            l "Please, cane we talk about it later."
+            e "I don't want to force you..."
+            show Louis normal
+            l "Thank you."
+            show Lucy normal at right
+            e "So... We're still going to the observatorium?"
+            show Louis flirty
+            l "We sure are!"
+            l "Meet you at the station after school."
+            show Lucy happy1 at right
+            e "Sure!"
+            $ show_Louis = True
+            pause 0.5 
+            $ Louis_love += 10
+            show expression Text("{color=ffffff}+10 Love Points{/color}", 
+                size=50, 
+                yalign=0.5, # Centers the text -- Toward Bottom.
+                xalign=0.5, # Centers the text -- Toward Right. 
+                drop_shadow=(2, 2)) as text
+            with dissolve
+            $ show_Louis = True
+            pause 0.5
+            $ renpy.pause()
+            hide text with dissolve
+            $ show_Louis = False
+            hide Lucy
+            hide Louis
+            with dissolve
+            jump Louisdate
+    else:
+        "Suddenly I see Roland and Louis fighting."
+        show Louis angry
+        show Roland upset at right
+        with dissolve
+        r "Can't you just let her make her own decisions?!"
+        l "Just leave her alone, you can't just try to make things the way they were."
+        l "You left us! You HURT US! Just because of your lack of ability to decide!"
+        l "You can't just come back and pretend none of it happened."
+        l "If she knew what you did- she'd never speak to you again."
+        r "She'd understand."
+        l "Don't be so selfish."
+        r "She's grown up, so have we."
+        r "Won't You stop being so childish and let her make her own choices?"
+        l "Well, you didn't give me much choice, did you?"
+        l "After what you've done to ME."
+        l "You do know you were MY fir-"
+        e "Guys, what's going on?"
+        show Louis upset
+        show Roland sad at right
+        show Lucy shock1 at left with dissolve
+        l "Lucy!"
+        l "What are you doing here?"
+        e "Looking for Roland?"
+        e "We were supposed to go to the movies together."
+        l "Oh, really? Didn't I tell you to leave her alone?"
+        e "Leave HIM alone, Louis, I won't tolerate this anymore."
+        e "You either tell me what happened, or stop bothering us."
+        "He glared at me, and, for a moment, I could see his dissapointment reflect in his eyes."
+        hide Louis 
+        with moveoutright
+        e "Auch."
+        e "I bet he's pissed."
+        e "The movie's still on?"
+        r "Are you sure you want to do this? I mean, Louis might think you're betraying him"
+        e "Listen, he's not that stupid, he knows I'll do anything for him."
+        e "But unless he tells me what's going on, and I conclude that you really ARE a bastard not worth mentioning, I'll continue doing my thing."
+        e "I love him, I do, but I'm my own person and I make my own decision, and he knows it."
+        r "Ok... If you're sure..."
+        show Lucy happy1 at left
+        e "Don't worry, Roland, it'll be allright."
+        show Roland happy
+        r "Thank you, meet you outside?"
+        e "Sure thing."
+        $ show_Roland = True
+        pause 0.5 
+        $ Roland_love += 10
+        show expression Text("{color=ffffff}+10 Love Points{/color}", 
+            size=50, 
+            yalign=0.5, # Centers the text -- Toward Bottom.
+            xalign=0.5, # Centers the text -- Toward Right. 
+            drop_shadow=(2, 2)) as text
+        with dissolve
+        $ show_Roland = True
+    
+        $ renpy.pause()
+        hide text with dissolve
+        $ show_Roland = False
+        hide Roland
+        hide Lucy
+        with dissolve
+        jump Rolanddate
+        
+label Jeremydate:
+    show bg cafe
+    show Lucy happy1
+    show Jeremy flirty at left
+    e "Thank you for this."
+    j "No, thank YOU."
+    j "BTW, I don't mean to pry, but how come you didn't make plans with that guy that's always by your side?"
+    show Lucy normal
+    e "Louis? I honestly don't know what's going on, either."
+    e "He's been acting odd ever since Roland started trying to, well, talk to me."
+    j "Maybe he is jealous."
+    e "Of whom, exactly?"
+    show Jeremy normal at left
+    j "You don't understand."
+    j "Love is mixed up somewhere here."
+    e "I don't believe it, there's no way Louis is in love with me."
+    j "Well, he is in love with someone."
+    j "Listen, I think you should stay out of it. The situation will calm down eventually, and you don't want to be a part of this."
+    e "I guess you're right."
+    show Jeremy flirty at left
+    j "And there's no way they'll let go of a girl like you."
+    show Lucy happy1 
+    e "Oh, stop it you!"
+    show Lucy shy
+    e "And thank you, really, this means a lot."
+    j "No problem, pretty lady."
+    $ show_Jeremy = True
+    pause 0.5 
+    $ Jeremy_love += 10
+    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+        size=50, 
+        yalign=0.5, # Centers the text -- Toward Bottom.
+        xalign=0.5, # Centers the text -- Toward Right. 
+        drop_shadow=(2, 2)) as text
+    with dissolve
+    $ show_Jeremy = True
+    pause 0.5
+    $ renpy.pause()
+    hide text with dissolve
+    $ show_Jeremy = False
+    hide Jeremy
+    hide Lucy
+    with dissolve
+    jump school2
+    
+label Rolandlove:
+    show bg station
+    show Roland flirty at left
+    show Lucy happy1
+    e "Thank you Roland, that was so fun!"
+    r "No problem, I had a great time as well."
+    e "I prefer the comic books, but this was surprisingly, well, good."
+    r "I know what you mean, usually they mess everything up, and it's just mindless violence."
+    e "I mean, more mindless violence than in the comics?"
+    r "And kinda sexist."
+    e "Yeah..."
+    show Lucy normal
+    e "On the serious note- you really don't want to tell me what's going on?"
+    show Roland normal at left
+    r "No.. Not now."
+    show Ronald flirty at left
+    r "This is our night, isn't it?"
+    show Lucy shy
+    e "Sure.."
+    r "Wanna go and get some pancakes?"
+    show Lucy happy1
+    e "Pancakes! You do know I believe people generally don't enjoy food as much as they should."
+    r "You sure do."
+    show Lucy pout
+    e "You meanie-"
+    r "And you love me the way I am."
+    $ show_Roland = True
+    pause 0.5 
+    $ Roland_love += 10
+    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+        size=50, 
+        yalign=0.5, # Centers the text -- Toward Bottom.
+        xalign=0.5, # Centers the text -- Toward Right. 
+        drop_shadow=(2, 2)) as text
+    with dissolve
+    $ show_Roland = True
+    $ renpy.pause()
+    hide text with dissolve
+    $ show_Roland = False
+    hide Roland
+    hide Lucy
+    with dissolve
+    jump school2
+    
+label Louisdate:
+    show bg station
+    show Louis flirty at left
+    show Lucy happy1
+    e "That was really cool!"
+    l "I am aware of yout obsession with stars, yes."
+    l "But that is to be expected, I have known you for years."
+    e "True, true."
+    e "I wonder if Roland still loves the stars."
+    show Louis normal at left
+    l "No."
+    show Lucy pout
+    show Louis upset at left
+    e "No, really."
+    l "No. I veto him."
+    e "But- Louis-"
+    l "I can't- honestlu, it's not up to me tell you, honestly."
+    show Louis flirty at left
+    l "And even if I were to tell you, it would't be on a beautiful night like this."
+    e "Jerk."
+    l "You love me the way I am, don't you."
+    e "..."
+    l "I'm buying you pancakes!"
+    show Lucy happy1
+    e "Yaaay!"
+    l "You are so easy to manipulate!"
+    e" No I'm not, but they better be dipped in chocolate!"
+    $ show_Louis = True
+    pause 0.5 
+    $ Louis_love += 10
+    show expression Text("{color=ffffff}+10 Love Points{/color}", 
+        size=50, 
+        yalign=0.5, # Centers the text -- Toward Bottom.
+        xalign=0.5, # Centers the text -- Toward Right. 
+        drop_shadow=(2, 2)) as text
+    with dissolve
+    $ show_Louis = True
+    pause 0.5
+    $ renpy.pause()
+    hide text with dissolve
+    $ show_Louis = False
+    hide Lucy
+    hide Louis
+    with dissolve
+    
+    jump school2
+
+label school2:
+    show bg classroom
+    "School, school, school..."
+    "I think nothing is as hellish as hours and hours of pure, distilled boredom."
+    "As I listen to the professor recite the textbook- quite literally, I could feel his monotonous voice drilling a hole in my head."
+    "I feel the voice of the seraphin promising me freedom- the bell rung. I felt my will to live return."
+    show Lucy happy1
+    e "Finally - lounch break, now I can finally do something that matters."
+    show Louis flirty at left
+    l "What, eat?"
+    e "Exactly!"
+    show Roland flirty at right
+    r "Seriously, you never change."
+    show Louis upset at left
+    "Oh no, they're at it again."
+    hide Louis
+    hide Roland 
+    with dissolve
+    "I run away from them before they managed to drag me in."
+    "And suddenly I see- "
+    show Jeremy flirty at left
+    with dissolve
+    "Jeremy."
+    j "Hey, sweetie, wanna grab some lunch?"
+    menu:
+        "Sure, I'm up for it.":
+            jump rooftop2
+        "I'm not really feeling up to it.":
+            jump class3
     return
+        
     
     
+    
+    
+        
     
         
     
