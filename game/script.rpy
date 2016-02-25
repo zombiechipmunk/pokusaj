@@ -75,8 +75,7 @@ init -5 python:
     style.my_bar.thumb_offset = 5
     
 
-
-define e = Character('Lucy', color="#FFC0CB")
+define e = Character('Lucy', color="#000000")
 define r = Character('Roland', color= "#8B2500")
 define l = Character("Louis", color = "#0000CD")
 define j = Character("Jeremy", color = "#00BFFF")
@@ -504,7 +503,6 @@ label Roland1:
     with dissolve
     $movie+=1
     jump continue2
-    jump continue2
 label continue2:
     show bg classroom
     show Lucy tired
@@ -659,6 +657,9 @@ label classR:
     $ renpy.pause()
     hide text with dissolve
     $ show_Roland = False
+    hide Roland
+    hide Lucy 
+    with dissolve
     jump corridor
 label classL:
     show bg classroom
@@ -1039,7 +1040,17 @@ label school2:
             jump rooftop2
         "I'm not really feeling up to it.":
             jump class3
-    return
+    hide Lucy
+    hide Jeremy
+    with dissolve
+    
+label rooftop2:
+    show bg rooftop
+    show Lucy happy1
+    show Jeremy flirty at left
+    e "So, anything new?"
+    
+    
         
     
     
